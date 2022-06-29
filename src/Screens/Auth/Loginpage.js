@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View, TextInput, Button,TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import * as RootNavigation from '../../../RootNavigation'
+import { openDatabase } from 'react-native-sqlite-storage';
+
+var db = openDatabase({ name: 'UserDatabase.db' });
 
 const Loginpage = () => {
     const [mail, setMail] = useState("");
@@ -11,12 +14,52 @@ const Loginpage = () => {
 
     const handleRegisterPage = () =>{
         console.log("test")
+
         RootNavigation.navigate('Registerpage');
     }
 
     const handleHomepage = () =>{
         console.log("test")
-        RootNavigation.navigate('Homepage');
+        if (!mail) {
+            alert('Please input Mail or phone number');
+            return;
+        }
+        if (!password) {
+            alert('Please input password');
+            return;
+        }
+        db.transaction(function (tx) {
+            tx.executeSql(
+              'SELECT * FROM table_user where user_mail = ? AND user_password = ?',
+              [mail,password],
+              (tx, results) => {
+                var len = results.rows.length;
+                console.log("leng", len)
+                if(len>0){
+                    console.log("exist", results.rows.item(0).user_id);                    
+                    navigation.navigate('Homepage',{user_id: results.rows.item(0).user_id,user_name:results.rows.item(0).user_name});
+                }else{
+                    db.transaction(function (tx) {
+                        tx.executeSql(
+                          'SELECT * FROM table_user where user_mobile = ? AND user_password = ?',
+                          [mail,password],
+                          (tx, results) => {
+                            var len = results.rows.length;
+                            
+                            if(len>0){
+                                console.log("leng", results.rows.item(0).user_id)
+                                navigation.navigate('Homepage',{user_id: results.rows.item(0).user_id, 
+                                    user_name:results.rows.item(0).user_name})
+                            }else{
+                                alert('Please input correct data');
+                            }
+                          }
+                        );
+                    });
+                }
+              }
+            );
+        });
     }
 
     return (

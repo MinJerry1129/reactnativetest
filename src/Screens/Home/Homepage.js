@@ -8,8 +8,11 @@ import HomeOfferlist from './Feed/HomeOfferlist';
 import restaurantimg from '../../assets/icons/restaurant.png';
 import SideMenuPage from '../Nav/SideMenuPage';
 
-const Homepage = () => {
+const Homepage = (props) => {
     const [isOpen, setIsOpen] = useState(false)
+    const user_id = props.route.params.user_id;
+    const user_name = props.route.params.user_name;
+    console.log("username::", props)
     useEffect(() => {
         const backAction = () => {
           return true;
@@ -67,8 +70,8 @@ const Homepage = () => {
                 <View style={styles.toparea}>
                     <Image style={styles.logo} source={restaurantimg}/>
                     <View style={styles.nameare}>
-                        <Text>Welcome</Text>
-                        <Text>Name</Text>
+                        <Text>Welcome,</Text>
+                        <Text>{user_name}</Text>
                     </View>
                 </View>
 
