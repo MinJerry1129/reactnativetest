@@ -97,7 +97,7 @@ const Registerpage = () => {
             alert('Please input correct phone number');
             return;
         }
-        if(validate_password(password)){
+        if(!validate_password(password)){
             alert('Please input over 8 letter');
             return;
         }
