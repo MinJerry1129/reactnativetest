@@ -42,6 +42,29 @@ const Registerpage = () => {
         console.log("test")
         RootNavigation.navigate('Loginpage');
     }
+    const validate_name = (text) => {
+        const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+        console.log(text, reg.test(text));
+    };
+    const validate_mail = (text) => {
+        const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+        return reg.test(text)
+    };
+    const validate_phone = (text) => {
+        let reg = true
+        if(text.length >9){
+            reg = isNaN(text)
+        }
+        return reg;        
+    };
+    const validate_password = (text) => {
+        let reg = false
+        if(text.length >7){
+            reg = true
+        }
+        return reg;
+    };
+
     const handleSignup = () =>{
         console.log(name, ", ",mail, ", ",mobile, ", ",password, ", ",value)
         let exist = false
@@ -65,6 +88,20 @@ const Registerpage = () => {
             alert('Please select City');
             return;
         }
+
+        if(!validate_mail(mail)){
+            alert('Please input correct mail form');
+            return;
+        }
+        if(validate_phone(mobile)){
+            alert('Please input correct phone number');
+            return;
+        }
+        if(validate_password(password)){
+            alert('Please input over 8 letter');
+            return;
+        }
+
         db.transaction(function (tx) {
             tx.executeSql(
               'SELECT * FROM table_user where user_mail = ? OR user_mobile = ?',
@@ -118,23 +155,27 @@ const Registerpage = () => {
                             onChangeText={setName}
                             placeholder="Enter Name"
                             value={name}
+                            keyboardType='name-phone-pad'
                         />
                         <TextInput
                             style={styles.input}
                             onChangeText={setMail}
                             value={mail}
                             placeholder="Enter Email"
-                        />
+                            autoCapitalize='none'
+                            keyboardType= 'email-address'/>
                         <TextInput
                             style={styles.input}
                             onChangeText={setMobile}
                             value={mobile}
                             placeholder="Enter Mobile Number"
+                            keyboardType='number-pad'
                         />
                         <TextInput
                             style={styles.input}
                             onChangeText={setPassword}
                             value={password}
+                            autoCapitalize='none'
                             placeholder="Enter Password"
                         />
                         <View>
