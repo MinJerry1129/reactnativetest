@@ -146,9 +146,10 @@ const styles = StyleSheet.create({
         height: 200
     },
     listTitle:{
-        margin:10,
         fontSize:20,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        textAlign:'center',
+        margin:10
     }
 });
 
