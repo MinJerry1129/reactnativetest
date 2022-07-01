@@ -13,13 +13,24 @@ const Loginpage = () => {
     const navigation = useNavigation();
 
     const handleRegisterPage = () =>{
-        console.log("test")
-
         RootNavigation.navigate('Registerpage');
     }
 
+    const validate_mail = (text) => {
+        const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+        return reg.test(text);
+    };
+
+    const validate_phone = (text) => {
+        let reg = true
+        if(text.length >9){
+            reg = isNaN(text)
+        }
+        return reg;        
+    };
+
+
     const handleHomepage = () =>{
-        console.log("test")
         if (!mail) {
             alert('Please input Mail or phone number');
             return;
@@ -28,6 +39,12 @@ const Loginpage = () => {
             alert('Please input password');
             return;
         }
+        console.log(validate_mail(mail), validate_phone(mail))
+        if(!validate_mail(mail) && validate_phone(mail)){
+            alert('Please input correct Mail or phone number');
+            return;
+        }
+        
         db.transaction(function (tx) {
             tx.executeSql(
               'SELECT * FROM table_user where user_mail = ? AND user_password = ?',
@@ -69,13 +86,16 @@ const Loginpage = () => {
                     <TextInput
                         style={styles.input}
                         onChangeText={setMail}
+                        autoCapitalize='none'
                         placeholder="Email or Phone number"
+                        keyboardType='email-address'
                         value={mail}
                     />
                     <TextInput
                         style={styles.input}
                         onChangeText={setPassword}
                         value={password}
+                        autoCapitalize='none'
                         placeholder="Password"
                     />
                     <View style={styles.button}>
