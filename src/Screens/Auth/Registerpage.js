@@ -211,11 +211,15 @@ const Registerpage = () => {
                                 onPress={() => handleSignup()}
                             />
                         </View>
+                        <View style={styles.signinView}>
+                            <Text>Already have account?</Text>
+                            <TouchableOpacity style={styles.text}
+                                onPress={() => handleLoginPage()} >
+                                <Text style={styles.signinText}> Sign In</Text>
+                            </TouchableOpacity>
+                        </View>
                         
-                        <TouchableOpacity style={styles.text}
-                            onPress={() => handleLoginPage()} >
-                            <Text>Already have account? Sign In</Text>
-                        </TouchableOpacity>
+                        
                     </View>
                 <View/>
             </View>
@@ -240,7 +244,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     button:{
-        marginTop: 10
+        marginTop: 20,
+        marginBottom:10
     },
     title:{
         fontSize:20,
@@ -269,6 +274,13 @@ const styles = StyleSheet.create({
         height: 40,
         fontSize: 16,
     },
+    signinView:{
+        flexDirection:'row'
+    },
+    signinText:{
+        fontWeight:'bold',
+        color:'#1589ff'
+    }
 });
 
 export default Registerpage;

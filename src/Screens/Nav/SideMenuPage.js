@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
     menutitle:{
         fontSize:18,
-        fontWeight:'normal',
+        fontWeight:'bold',
         padding:10
     },
 });

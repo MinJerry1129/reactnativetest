@@ -24,11 +24,11 @@ const Homepage = (props) => {
       
     const positionlist = [
         {name: 'Restaurants', count: '12', fav: '3', imgurl:restaurantimg, id:0},
-        {name: 'Coffee', count: '12', fav: '3', imgurl:restaurantimg, id:1},
-        {name: 'Bars', count: '12', fav: '3', imgurl:restaurantimg, id:2},
-        {name: 'Hotels', count: '12', fav: '3', imgurl:restaurantimg, id:3},
-        {name: 'Attractions', count: '12', fav: '3', imgurl:restaurantimg, id:4},
-        {name: 'Parkings', count: '12', fav: '3', imgurl:restaurantimg, id:5},
+        {name: 'Coffee', count: '13', fav: '4', imgurl:restaurantimg, id:1},
+        {name: 'Bars', count: '14', fav: '5', imgurl:restaurantimg, id:2},
+        {name: 'Hotels', count: '15', fav: '7', imgurl:restaurantimg, id:3},
+        {name: 'Attractions', count: '16', fav: '9', imgurl:restaurantimg, id:4},
+        {name: 'Parkings', count: '17', fav: '11', imgurl:restaurantimg, id:5},
     ];
     
     const positionlistItem = ({ item, index }) => (
@@ -109,17 +109,19 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         flexDirection:'row',
         marginLeft: 10,
-        marginRight: 10
+        marginRight: 10,
+        marginBottom:10,
+        marginTop:15
     },
     toparea:{
         flexDirection:'row',
         height:60, 
         alignItems: 'center',
-        marginLeft: 50,
+        marginLeft: 30,
         marginRight: 10
     },
     nameare:{
-        marginLeft:10,
+        marginLeft:15,
         justifyContent: 'center',
     },
     title:{

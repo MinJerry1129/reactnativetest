@@ -104,11 +104,15 @@ const Loginpage = () => {
                             onPress={() => handleHomepage()}
                         />
                     </View>
-                    
-                    <TouchableOpacity style={styles.text}
+                    <View style={styles.signupView}>
+                        <Text>Don't have account? </Text>
+                        <TouchableOpacity style={styles.text}
                         onPress={() => handleRegisterPage()} >
-                        <Text>Don't have account? Sign UP</Text>
-                    </TouchableOpacity>                   
+                        <Text style={styles.singnupText}>Sign UP</Text>
+                    </TouchableOpacity>  
+                    </View>
+                    
+                                     
                 </View>
                 <View/>
             </View>
@@ -118,7 +122,7 @@ const Loginpage = () => {
 const styles = StyleSheet.create({    
     contain:{
         flex: 1,
-        backgroundColor:"#fff",        
+        backgroundColor:"#f5f5f5",        
         justifyContent:'space-between'
     },
     input: {
@@ -133,8 +137,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     button:{
-        marginTop: 10
+        marginTop: 20,
+        marginBottom:10
     },
+    signupView:{
+        flexDirection:'row'
+    },
+    singnupText:{
+        fontWeight:'bold',
+        color:'#1589ff'
+    }
 });
 
 export default Loginpage;
